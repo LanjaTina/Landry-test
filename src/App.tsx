@@ -45,7 +45,7 @@ const App: React.FC = () => {
     <div>
       {apiKey ? ( // Vérifier si une clé API est disponible
         <div>
-          <h1>Looking for a movie?</h1>
+          <h1>Film Danze</h1>
           <div className="search-bar">
             <form onSubmit={handleSearch}>
               <input
@@ -55,9 +55,9 @@ const App: React.FC = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {isLoading ? (
-                <button disabled>Searching...</button>
+                <button disabled>Chargement...</button>
               ) : (
-                <button type="submit">Search</button>
+                <button type="submit">Chercher</button>
               )}
             </form>
           </div>
