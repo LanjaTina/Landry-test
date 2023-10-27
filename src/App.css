@@ -53,3 +53,26 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* Modifications pour l'effet de verre et l'image sans bordure */
+
+.movie-item {
+  background-color: rgba(255, 255, 255, 0.2); /* Couleur de fond avec opacité pour l'effet de verre */
+  border: none; /* Supprimez la bordure */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin: 10px 0;
+  transition: transform 0.3s, background-color 0.3s;
+  cursor: pointer;
+  color: #333; /* Couleur du texte de l'item */
+  backdrop-filter: blur(5px); /* Ajoute un effet de verre aux éléments .movie-item */
+}
+.movie-item:hover {
+  transform: scale(1.05);
+}
+
+.movie-poster {
+  width: 100%; /* Assurez-vous que l'image remplit complètement son conteneur */
+  border-radius: 0; /* Supprimez le coin arrondi */
+  backdrop-filter: blur(5px); /* Ajoute un effet de verre aux images */
+}
