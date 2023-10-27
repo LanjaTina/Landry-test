@@ -4,14 +4,25 @@ const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit
   const [userApiKey, setUserApiKey] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  const handleApiKeySubmit = (e: React.FormEvent) => {
+  const handleApiKeySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (userApiKey.trim() !== "") {
-      onSubmit(userApiKey);
-      setUserApiKey("");
-      setError(null);
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/configuration?api_key=${userApiKey}`);
+        if (response.ok) {
+          // La clé API est correcte
+          onSubmit(userApiKey);
+          setUserApiKey("");
+          setError(null);
+        } else {
+          setError("Clé d' API incorrecte.");
+        }
+      } catch (error) {
+        setError("Clé invalide");
+      }
     } else {
-      setError("Veuillez entrer une clé API valide.");
+      setError("Veuillez entrer une clé d'API valide.");
     }
   };
 
@@ -26,7 +37,7 @@ const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit
           onChange={(e) => setUserApiKey(e.target.value)}
         />
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">Valider</button>
+        <button type="submit">Soumettre</button>
       </form>
     </div>
   );
